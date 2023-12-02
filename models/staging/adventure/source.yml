@@ -1,0 +1,88 @@
+version: 2
+
+sources:
+  - name: sap
+    description: Sap de vendas adventure
+    schema: sap_adw
+    tables:
+
+      # Dimensão Produto
+      - name: product
+        description: tabela com o id do produto, nome do produto, cor do produto, id da subcategoria
+        columns:
+          - name: productid
+            tests:
+            - unique
+            - not_null
+
+      - name: productcategory
+        description: tabela com o id da subcategoria, id da categoria, nome da subcategoria
+        columns:
+          - name: productcategoryid
+            tests:
+            - unique
+            - not_null
+
+      - name: productsubcategory
+        description: tabela com o id da subcategoria, id da categoria, nome da subcategoria
+        columns:
+          - name: productsubcategoryid
+            tests:
+            - unique
+            - not_null
+
+       # Dimensão clientes
+
+      - name: store
+        description: tabela com "businessentityid","name","salespersonid","demographics","rowguid","modifieddate"
+        columns:
+          - name: businessentityid
+            tests:
+            - unique
+            - not_null
+       
+      - name: customer
+        description: tabela com customerid","personid","storeid","territoryid","rowguid","modifieddate"
+        columns:
+          - name: customerid
+            tests:
+            - unique
+            - not_null
+
+      - name: person
+        description: tabela com "businessentityid","persontype","namestyle","title","firstname","middlename","lastname","suffix","emailpromotion","additionalcontactinfo","demographics","rowguid","modifieddate"
+        columns:
+          - name: businessentityid
+            tests:
+            - unique
+            - not_null
+
+# Dimensão local
+
+      - name: address
+      
+      - name: stateprovince
+
+      
+      - name: countryregion
+
+      
+# Dimensão degenerada
+
+      - name: creditcard
+      
+
+# Dimensão motivo compra e a identificação do pedido 
+
+      - name: salesreason
+      
+      - name: salesorderheadersalesreason
+
+      
+# Fato vendas
+
+      - name: salesorderdetail
+
+      
+      - name: salesorderheader
+   
