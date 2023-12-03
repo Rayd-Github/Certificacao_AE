@@ -6,9 +6,26 @@ sources:
     schema: sap_adw
     tables:
 
-      # Dimensão Produto
+# Dimensão Pedidos
+      - name: salesorderdetail
+        description: Informações sobre a cesta de compras (produtos, quantidade, preço)
+        columns: 
+          - name: salesorderdetailid
+            tests:
+            - unique
+            - not_null
+                         
+      - name: salesorderheader
+        description: Informações sobre o pedido de compra (cesta de compras, cliente, vendedor, nota fiscal)
+        columns: 
+         - name: salesorderid
+           tests:
+           - unique
+           - not_null
+
+# Dimensão Produto
       - name: product
-        description: tabela com o id do produto, nome do produto, cor do produto, id da subcategoria
+        description: Informações de identificação do produto (nome, cor, tamanho)
         columns:
           - name: productid
             tests:
@@ -16,7 +33,7 @@ sources:
             - not_null
 
       - name: productcategory
-        description: tabela com o id da subcategoria, id da categoria, nome da subcategoria
+        description: Informações sobre a categoria do produto ( Bike, componentes, acessórios, roupas)
         columns:
           - name: productcategoryid
             tests:
@@ -24,17 +41,16 @@ sources:
             - not_null
 
       - name: productsubcategory
-        description: tabela com o id da subcategoria, id da categoria, nome da subcategoria
+        description: Informações de cada produto de acordo com  sua categoria e subcategoria
         columns:
           - name: productsubcategoryid
             tests:
             - unique
             - not_null
 
-       # Dimensão clientes
-
+# Dimensão clientes
       - name: store
-        description: tabela com "businessentityid","name","salespersonid","demographics","rowguid","modifieddate"
+        description: Informações sobre a loja onde o cliente executou a compra (nome da loja, vendedor)
         columns:
           - name: businessentityid
             tests:
@@ -42,7 +58,7 @@ sources:
             - not_null
        
       - name: customer
-        description: tabela com customerid","personid","storeid","territoryid","rowguid","modifieddate"
+        description: Informações sobre o cliente 
         columns:
           - name: customerid
             tests:
@@ -50,39 +66,60 @@ sources:
             - not_null
 
       - name: person
-        description: tabela com "businessentityid","persontype","namestyle","title","firstname","middlename","lastname","suffix","emailpromotion","additionalcontactinfo","demographics","rowguid","modifieddate"
+        description: Informações pessoais do cliente (nome, sobrenome)
         columns:
           - name: businessentityid
             tests:
-            - unique
             - not_null
 
+# Dimensão motivo compra
+      - name: salesreason
+        description: Informações do motivo que levou o cliente a comprar o produto (preço, qualidade, promoção)
+        
+                     
+      - name: salesorderheadersalesreason
+        description: Informações que relaciona o motivo com a compra propriamente dita
+        columns: 
+        - name: salesorderid
+          tests:
+           - not_null
+
+# Dimensão degenerada
+      - name: creditcard
+        description: Informações sobre o cartão de crédito utilizado na compra (bandeira, número do cartão, data de validade)
+        columns:
+          - name: creditcardid
+            tests:
+             - unique
+             - not_null
+          
+
 # Dimensão local
-
       - name: address
-      
-      - name: stateprovince
+        description: Informações sobre o endereço da compra
+        columns:
+          - name: addressid
+            tests:
+             - unique
+             - not_null
 
+      - name: stateprovince
+        description: Informações sobre a UF da compra
+        columns:
+          - name: stateprovinceid
+            tests:
+             - unique
+             - not_null
       
       - name: countryregion
+        description: Informações sobre o País da compra
+        columns:
+          - name: countryregioncode
+            tests:
+             - unique
+             - not_null
 
       
-# Dimensão degenerada
 
-      - name: creditcard
-      
 
-# Dimensão motivo compra e a identificação do pedido 
 
-      - name: salesreason
-      
-      - name: salesorderheadersalesreason
-
-      
-# Fato vendas
-
-      - name: salesorderdetail
-
-      
-      - name: salesorderheader
-   

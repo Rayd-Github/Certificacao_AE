@@ -6,7 +6,7 @@ with
         , cast(countryregioncode as string) as nome_sigla_pais
        -- , cast(isonlystateprovinceflag as tipo) as nome
         , cast(name as string) as nome_estado
-        --, cast(territoryid as tipo) as nome
+        , cast(territoryid as tipo) as id_territorio
        --, cast(rowguid as tipo) as nome
        --, cast(modifieddate as tipo) as nome
         from {{ source('sap', 'stateprovince') }}
