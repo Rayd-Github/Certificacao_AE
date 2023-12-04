@@ -1,7 +1,7 @@
 with
     fonte_store as (
         select 
-        cast(businessentityid as int) as id_loja
+        cast(businessentityid as int) as id_representante
         , cast(name as string) as nome_loja
         , cast(salespersonid as int) as id_vendedor
         --, cast(demographics as tipo) as nome

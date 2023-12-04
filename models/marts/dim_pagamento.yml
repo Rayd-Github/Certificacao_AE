@@ -1,0 +1,9 @@
+models:
+  - name: dim_pagamento
+    description: Essa é a dimensão com informações do pagamento via cartão de crédito dos clientes da Adventure
+    columns:
+      - name: pk_pagamento
+        description: Essa é a chave primaria da dimensão clientes.
+        tests:
+          - unique
+          - not_null
