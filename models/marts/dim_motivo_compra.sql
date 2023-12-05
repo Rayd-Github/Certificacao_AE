@@ -16,6 +16,8 @@ with
         , stg_motivo.nome_razao_motivo
         , stg_motivo_pedido.id_pedido
       --  , stg_motivo_pedido. id_motivo
+
+      
         from stg_motivo_pedido
         left join stg_motivo on
             stg_motivo_pedido.id_motivo = stg_motivo.id_motivo
