@@ -14,7 +14,7 @@ with
         , cast (salespersonid as int) as  id_vendedor
         , cast (territoryid as int) as id_territorio
        -- , cast (billtoaddressid as tipo) as nome
-        --, cast (shiptoaddressid as tipo) as nome
+        , cast (shiptoaddressid as string) as endereco_destino
         --, cast (shipmethodid as tipo) as nome
         , cast (creditcardid as int) as id_cartao
         , cast (creditcardapprovalcode as string) as id_compra_aprovada
