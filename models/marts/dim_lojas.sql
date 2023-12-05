@@ -18,7 +18,7 @@ with
         select 
        stg_store.id_representante
     ,  stg_store.nome_loja
-    ,  stg_store.id_vendedor
+    --,  stg_store.id_vendedor
 
     ,  stg_salesorderheader.id_pedido
     ,  stg_salesorderheader.data_pedido
