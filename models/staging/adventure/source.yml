@@ -6,7 +6,7 @@ sources:
     schema: sap_adw
     tables:
 
-# Dimensão Pedidos
+# Fato Pedidos (intermediária)
       - name: salesorderdetail
         description: Informações sobre a cesta de compras (produtos, quantidade, preço)
         columns: 
