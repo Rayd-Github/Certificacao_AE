@@ -10,3 +10,4 @@ with
 
 select *
 from stg_salesreason
+

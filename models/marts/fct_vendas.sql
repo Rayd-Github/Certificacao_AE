@@ -63,11 +63,6 @@ with
     from {{ ref('dim_b2c') }}
 )
 
-,  dim_motivo_compra as (
-    select *
-    from {{ ref('dim_motivo_compra') }}
-)
-
 ,  dim_pagamento as (
     select *
     from {{ ref('dim_pagamento') }}
@@ -82,6 +77,14 @@ with
     select *
     from {{ ref('dim_data') }}
 )
+ 
+, dim_status as (
+    select 
+        id_pedido
+        , id_status
+    from {{ ref('stg_sap__salesorderheader') }}
+)
+
 
 ,  pedidos_itens as (
     select *
@@ -111,11 +114,7 @@ with
    --, dim_b2c.nome
    --, dim_b2c.sobrenome
 
-   , dim_motivo_compra.pk_motivo_compra as motivo_compra_fk
-   --, dim_motivo_compra.id_motivo
-   --, dim_motivo_compra.nome_motivo
-   --, dim_motivo_compra.nome_razao_motivo
-   --, dim_motivo_compra.id_pedido
+   
 
     , dim_pagamento.pk_pagamento as pagamento_fk
    -- , dim_pagamento.nome_bandeira_cartao
@@ -141,7 +140,7 @@ with
     -- , dim_local.nome_pais
 
     , pedidos.sk_pedido_item
-   -- , pedidos.id_pedido
+    , pedidos.id_pedido
     , pedidos.data_pedido
    -- , pedidos.id_status
    -- , pedidos.id_cliente
@@ -166,20 +165,26 @@ with
     --, dim_data.year
    -- , dim_data.month_actual
 
+    , dim_status.id_status
+    , case 
+        when dim_status.id_status = 5
+        then "compra_aprovada"
+        else "compra_nao_aprovada"
+    end as status_compra
 
     from pedidos_itens as pedidos
     left join dim_produtos 
         on pedidos.id_produto = dim_produtos.id_produto
     left join dim_b2c 
         on pedidos.id_cliente = dim_b2c.id_cliente
-    left join dim_motivo_compra 
-        on pedidos.id_motivo = dim_motivo_compra.id_motivo
-    left join dim_pagamento
+        left join dim_pagamento
         on pedidos.id_cartao = dim_pagamento.id_cartao
     left join dim_local 
         on pedidos.endereco_destino = dim_local.id_endereco
     left join dim_data 
         on pedidos.data_pedido = dim_data.date_actual
+    left join dim_status
+        on dim_status.id_pedido = pedidos.id_pedido
 
     )
 
