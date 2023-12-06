@@ -7,3 +7,15 @@ models:
         tests:
           - unique
           - not_null
+
+      - name: id_cartao
+        description: chave natural de identificação do carão
+        tests:
+          - unique
+          - not_null
+
+
+      - name: nome_bandeira_cartao
+        description: bandeira do cartão utilizado na compra
+        tests:
+          - not_null

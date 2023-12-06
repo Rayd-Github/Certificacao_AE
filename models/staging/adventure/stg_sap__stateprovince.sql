@@ -10,7 +10,7 @@ with
        --, cast(rowguid as tipo) as nome
        --, cast(modifieddate as tipo) as nome
         from {{ source('sap', 'stateprovince') }}
-    )
+     )
 
 select *
 from fonte_stateprovince

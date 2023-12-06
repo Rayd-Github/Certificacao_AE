@@ -28,12 +28,11 @@ with
    -- ,   stg_category.id_categoria
     ,   stg_category.nome_categoria
     
+     
       
 from stg_product
-        left join stg_subcategory on
-            stg_product.id_subcategoria= stg_subcategory.id_subcategoria
-left join stg_category on
-            stg_subcategory.id_categoria = stg_category.id_categoria
+        left join stg_subcategory on stg_product.id_subcategoria= stg_subcategory.id_subcategoria
+        left join stg_category on  stg_subcategory.id_categoria = stg_category.id_categoria
     )
 
     , criar_chave as (
