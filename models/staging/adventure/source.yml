@@ -8,7 +8,8 @@ sources:
 
 # Fato Pedidos (intermediária)
       - name: salesorderdetail
-        description: Informações sobre a cesta de compras (produtos, quantidade, preço)
+        description: Informações sobre a cesta de compras (produtos, quantidade, preço). 
+                      Cada registro nesta tabela representa um único detalhe do pedido.
         columns: 
           - name: salesorderdetailid
             tests:
@@ -17,6 +18,8 @@ sources:
                          
       - name: salesorderheader
         description: Informações sobre o pedido de compra (cesta de compras, cliente, vendedor, nota fiscal)
+          Tabela contém informações sobre o cartão de crédito utilizado no pedido, o endereço de entrega e o cliente. 
+          Cada registro nesta tabela representa um cabeçalho de pedido que contém um ou mais detalhes do pedido.
         columns: 
          - name: salesorderid
            tests:

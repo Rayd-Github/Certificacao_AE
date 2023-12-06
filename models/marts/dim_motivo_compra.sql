@@ -1,26 +1,27 @@
 with 
-    stg_motivo as (
+    stg_salesreason as (
         select *
         from {{ ref('stg_sap__salesreason') }}
     )
 
-    , stg_motivo_pedido as (
+    , stg_salesorderheadersalesreason as (
         select *
         from {{ ref('stg_sap__salesorderheadersalesreason') }}
     )
 
     , join_tabelas as (
         select 
-        stg_motivo.id_motivo
-        , stg_motivo.nome_motivo
-        , stg_motivo.nome_razao_motivo
-        , stg_motivo_pedido.id_pedido
-      --  , stg_motivo_pedido. id_motivo
+          stg_salesreason.id_motivo
+        , stg_salesreason.nome_motivo
+        , stg_salesreason.nome_razao_motivo
+
+        , stg_salesorderheadersalesreason.id_pedido
+      --  ,stg_salesorderheadersalesreason. id_motivo
 
       
-        from stg_motivo_pedido
-        left join stg_motivo on
-            stg_motivo_pedido.id_motivo = stg_motivo.id_motivo
+        from stg_salesorderheadersalesreason
+        left join stg_salesreason on
+            stg_salesorderheadersalesreason.id_motivo = stg_salesreason.id_motivo
     )
     , criar_chave as (
         select  
