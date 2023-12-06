@@ -9,7 +9,7 @@ with date_array as (
 )
 
 , casting_fix as (
-    select cast(date_day as date) as date_day
+    select cast(date_day as timestamp) as date_day
     from date_array
 )
 
@@ -17,7 +17,7 @@ with date_array as (
     select
         {{
             dbt_utils.generate_surrogate_key(['date_day'])
-        }} as date_sk
+        }} as pk_data
        -- , cast(date(date_day, 'yyyymmdd') as int) as date_dim_id
         , date_day as date_actual
        -- , date_trunc('week', date_day) as reference_week

@@ -8,7 +8,7 @@ with
         from {{ ref('stg_sap__salesorderdetail') }}
     )
 
-    , join_tabelas as (
+      , join_tabelas as (
         select 
               stg_salesorderheader.id_pedido
             , stg_salesorderheader.data_pedido
@@ -30,17 +30,19 @@ with
             , stg_salesorderdetail.preco_unitario
             , stg_salesorderdetail.desconto_preco_unitario
 
+           
+
         from stg_salesorderdetail
         left join stg_salesorderheader on 
             stg_salesorderdetail.id_pedido = stg_salesorderheader.id_pedido
-       )
+               )
 
      , criar_chave as (
-        select
+        select 
            cast(id_pedido as string) || cast(id_produto as string) as sk_pedido_item
             , *
         from join_tabelas
     )
 
-    select *
+    select distinct *
     from criar_chave

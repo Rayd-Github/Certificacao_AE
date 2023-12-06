@@ -44,5 +44,6 @@ left join stg_store on
         from join_tabelas
     )
 
-    select *
-    from criar_chave
+select *
+from criar_chave
+
