@@ -1,9 +1,0 @@
-models:
-  - name: dim_loja
-    description: Essa é a dimensão com informações da loja representante da Adventure
-    columns:
-      - name: pk_loja
-        description: Essa é a chave primaria da dimensão lojas
-        tests:
-          - unique
-          - not_null

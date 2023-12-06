@@ -11,30 +11,30 @@ with
 
   , join_tabelas as (
         select 
-      -- stg_creditcard.id_cartao
-     stg_creditcard.nome_bandeira_cartao
+            stg_creditcard.id_cartao
+            , stg_creditcard.nome_bandeira_cartao
     
 
-    ,  stg_salesorderheader.id_pedido
-    ,  stg_salesorderheader.data_pedido
-    ,  stg_salesorderheader.id_status
-    ,  stg_salesorderheader.id_cliente
-    ,  stg_salesorderheader.id_vendedor
-    ,  stg_salesorderheader.id_territorio
-    ,  stg_salesorderheader.id_cartao
-    ,  stg_salesorderheader.id_compra_aprovada
-    ,  stg_salesorderheader.subtotal_compra
-    ,  stg_salesorderheader.total_compra
+   -- ,  stg_salesorderheader.id_pedido
+   -- ,  stg_salesorderheader.data_pedido
+   -- ,  stg_salesorderheader.id_status
+   -- ,  stg_salesorderheader.id_cliente
+   -- ,  stg_salesorderheader.id_vendedor
+   -- ,  stg_salesorderheader.id_territorio
+   -- ,  stg_salesorderheader.id_cartao
+   -- ,  stg_salesorderheader.id_compra_aprovada
+   -- ,  stg_salesorderheader.subtotal_compra
+   -- ,  stg_salesorderheader.total_compra
 
-    from stg_salesorderheader
-        left join stg_creditcard on
-            stg_salesorderheader.id_cartao = stg_creditcard.id_cartao 
+    from stg_creditcard
+       -- left join stg_creditcard on
+        --    stg_salesorderheader.id_cartao = stg_creditcard.id_cartao 
 
        )
 
     , criar_chave as (
         select
-            row_number() over (order by id_compra_aprovada) as pk_pagamento
+            row_number() over (order by id_cartao) as pk_pagamento
             , *
         from join_tabelas
     )

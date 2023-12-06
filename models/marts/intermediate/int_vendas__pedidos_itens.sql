@@ -8,6 +8,12 @@ with
         from {{ ref('stg_sap__salesorderdetail') }}
     )
 
+    , stg_salesorderheadersalesreason as (
+        select *
+        from {{ ref('stg_sap__salesorderheadersalesreason') }}
+    )
+
+
     , join_tabelas as (
         select 
               stg_salesorderheader.id_pedido
@@ -30,9 +36,13 @@ with
             , stg_salesorderdetail.preco_unitario
             , stg_salesorderdetail.desconto_preco_unitario
 
+            , stg_salesorderheadersalesreason.id_motivo
+
         from stg_salesorderdetail
         left join stg_salesorderheader on 
             stg_salesorderdetail.id_pedido = stg_salesorderheader.id_pedido
+        left join stg_salesorderheadersalesreason on
+            stg_salesorderheader.id_pedido = stg_salesorderheadersalesreason.id_pedido
        )
 
      , criar_chave as (
