@@ -157,7 +157,8 @@ with
    -- , pedidos.id_oferta
     , pedidos.preco_unitario
     , pedidos.desconto_preco_unitario
-    , pedidos.preco_unitario * pedidos.quantidade_pedido as total_bruto
+    --, pedidos.preco_unitario * pedidos.quantidade_pedido as receita_bruto
+    -- , (1-pedidos.desconto_preco_unitario) * pedidos.preco_unitario as receita_liquida
 
      , dim_data.pk_data as data_fk
    --  , dim_data.date_actual
@@ -185,9 +186,23 @@ with
         on pedidos.data_pedido = dim_data.date_actual
     left join dim_status
         on dim_status.id_pedido = pedidos.id_pedido
+     )
 
-    )
+
+  , Transformacoes as (
+        select
+            *
+            , preco_unitario * quantidade_pedido as bruto
+            , (1 - desconto_preco_unitario) * preco_unitario * quantidade_pedido as liquido
+            , case
+                when desconto_preco_unitario > 0 then true
+                when desconto_preco_unitario = 0 then false
+                else false
+            end as is_desconto
+    from join_tabelas
+     )
 
 select *
-from join_tabelas
+--from join_tabelas
+from Transformacoes
 
