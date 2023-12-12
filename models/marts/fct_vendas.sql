@@ -1,56 +1,4 @@
--- with
---     dim_produtos as (
---     select *
---     from {{ ref('dim_produtos') }}
--- )
--- select *
---  from dim_produtos
---  ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨   
--- with
---     dim_b2c as (
---     select *
---     from {{ ref('dim_b2c') }}
--- )
--- select *
---  from dim_b2c
--- ----------------------
--- with
---     dim_motivo_compra as (
---     select *
---     from {{ ref('dim_motivo_compra') }}
--- )
--- select *
---  from dim_motivo_compra
--- 
--- -----------------------------------------
--- with
---     dim_pagamento as (
---     select *
---     from {{ ref('dim_pagamento') }}
--- )
--- select *
---  from dim_pagamento
--- 
--- ------------------------------------------------------
--- 
--- with
---     dim_local as (
---     select *
---     from {{ ref('dim_local') }}
--- )
--- select *
---  from dim_local
--- 
--- -------------------------------------------
--- 
--- with
---    int_vendas__pedidos_itens as (
---     select *
---     from {{ ref('int_vendas__pedidos_itens') }}
--- )
--- select *
---  from int_vendas__pedidos_itens
--- 
+
 -- ---------------------------------------- FATO ----------------------------
 with
     dim_produtos as (
@@ -115,7 +63,6 @@ with
    --, dim_b2c.sobrenome
 
    
-
     , dim_pagamento.pk_pagamento as pagamento_fk
    -- , dim_pagamento.nome_bandeira_cartao
    -- --, dim_pagamento.id_pedido
@@ -157,8 +104,7 @@ with
    -- , pedidos.id_oferta
     , pedidos.preco_unitario
     , pedidos.desconto_preco_unitario
-    --, pedidos.preco_unitario * pedidos.quantidade_pedido as receita_bruto
-    -- , (1-pedidos.desconto_preco_unitario) * pedidos.preco_unitario as receita_liquida
+
 
      , dim_data.pk_data as data_fk
    --  , dim_data.date_actual
@@ -203,6 +149,6 @@ with
      )
 
 select *
---from join_tabelas
+
 from Transformacoes
 

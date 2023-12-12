@@ -78,6 +78,11 @@ sources:
 # Dimensão motivo compra
       - name: salesreason
         description: Informações do motivo que levou o cliente a comprar o produto (preço, qualidade, promoção)
+        columns: 
+          - name: salesreasonid
+            tests:
+            - not_null
+            
         
                      
       - name: salesorderheadersalesreason
